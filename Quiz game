@@ -1,0 +1,61 @@
+import random
+
+# Define quiz questions and answers
+quiz_data = [
+    {
+        "question": "What is the capital of France?",
+        "options": ["A. London", "B. Madrid", "C. Paris"],
+        "answer": "C"
+    },
+    {
+        "question": "What is the largest planet in our solar system?",
+        "options": ["A. Earth", "B. Mars", "C. Jupiter"],
+        "answer": "C"
+    },
+    {
+        "question": "What is 2 + 2?",
+        "options": ["A. 3", "B. 4", "C. 5"],
+        "answer": "B"
+    }
+]
+
+def display_question(question_data):
+    print(question_data["question"])
+    for option in question_data["options"]:
+        print(option)
+
+def evaluate_answer(user_answer, correct_answer):
+    return user_answer == correct_answer
+
+def quiz_game():
+    score = 0
+    total_questions = len(quiz_data)
+
+    print("Welcome to the Quiz Game!")
+    print("Rules: You will be asked multiple-choice questions. Choose the correct option.")
+    
+    for question_data in random.sample(quiz_data, total_questions):
+        display_question(question_data)
+        user_choice = input("Select your answer (A/B/C): ").upper()
+
+        if evaluate_answer(user_choice, question_data["answer"]):
+            print("Correct!")
+            score += 1
+        else:
+            print("Incorrect. The correct answer is:", question_data["answer"])
+    
+    print("Quiz completed! Your score:", score, "/", total_questions)
+    
+    if score == total_questions:
+        print("Congratulations! You got a perfect score!")
+    else:
+        print("Good job! You completed the quiz.")
+
+    play_again = input("Do you want to play again? (yes/no): ").lower()
+    if play_again == "yes":
+        quiz_game()
+    else:
+        print("Thank you for playing!")
+
+if __name__ == "__main__":
+    quiz_game()
